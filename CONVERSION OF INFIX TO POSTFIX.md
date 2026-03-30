@@ -30,11 +30,33 @@ To write a Python program to convert a given Infix expression to Postfix express
 ### PROGRAM
 
 ```
-
+def infixToPostfix(expression): 
+    stack = [] 
+    output = ''
+    for character in expression:
+        if character not in Operators:
+            output+=character
+        elif character =='(':
+            stack.append('(')
+        elif character == ')':
+            while stack and stack[-1]!='(':
+                output+=stack.pop()
+            stack.pop()
+        else:
+            while stack and stack[-1]!='(' and Priority[character]<=Priority[stack[-1]]:
+                output+=stack.pop()
+            stack.append(character)
+    while stack:
+        output+=stack.pop()
+    return output
+expression =input()
+print("infix notation: ",expression)
+print("postfix notation: ",infixToPostfix(expression))
 ```
 
 ### OUTPUT
+<img width="1186" height="215" alt="image" src="https://github.com/user-attachments/assets/03ee3828-574c-4d83-b245-02feff92d423" />
 
 
 ### RESULT
-
+Therefore, the output is the example to write a Python program to convert a given Infix expression to Postfix expression by following the precedence and associative rules. The input expression contains only Division, Subtraction, and Bitwise AND operators. A dictionary is used to set the priority for operators, and a set is used to hold the operators used in the given expression.
